@@ -1,2 +1,0 @@
-20210531 00:33:13.803049  {"User":{"Code":404,"IP":"127.0.0.1","Agent":"PostmanRuntime/7.28.0","Data":{"status":0,"url":"https:\/\/bsc-rest.rst\/api\/users\/resetPassword","forwardURL":"\/","message":"Username or Email not found"}}}
-20210531 01:07:59.370925  {"User":{"Code":503,"IP":"127.0.0.1","Agent":"PostmanRuntime/7.28.0","Data":{"status":0,"url":"https:\/\/bsc-rest.rst\/api\/users\/login","forwardURL":"\/","message":"Access denied","data":"GET"}}}
