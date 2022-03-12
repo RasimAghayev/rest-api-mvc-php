@@ -1,1 +1,0 @@
-20220114 22:00:22.631992  {"User":{"Code":417,"IP":"127.0.0.1","Agent":"PostmanRuntime/7.28.4","Data":{"status":0,"url":"https:\/\/bsc-rest.rst\/api\/users\/resetPassword","forwardURL":"SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'user_id' cannot be null","message":""}}}
