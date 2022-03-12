@@ -1,0 +1,29 @@
+Angular
+npm install -g @angular/cli
+ng new AngularPHP7CRUD
+cd AngularPHP7CRUD
+ng serve --open
+ng g c add
+ng g c view
+ng g c edit
+ng g class students
+ng g service students
+
+react
+npm i -g react
+npx create-react-app reactcrud
+cd reactcrud
+npm start
+npm i bootstrap --save
+npm i react-router-do --save
+
+
+
+VUE
+npm install -g vue-cli
+vue init pwa vuecrud
+cd vuecrud
+npm install
+npm run dev
+npm i bootstrap-vue bootstrap
+

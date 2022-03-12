@@ -1,0 +1,50 @@
+https://bsc-rest.rst/api/users/login
+{
+	"Email": "sswswww@pashabank.az",
+	"Password": "11111saADs@"
+}
+
+https://bsc-rest.rst/api/users/resetPassword
+{
+	"Email": "NWQwODVkNGQ0OTIyODJiNmRkOGEzMGYwZjFjYjFiOTZjZTNlM2Q1Zjg5OGU5YWEwZjcwNWJhYmI2MjJk"
+}
+
+
+http://bsc-rest.rst/api/users/register
+{
+	"Name": "Rasim",
+	"SurName": "Rasim",
+	"MiddleName": "Shukur",
+	"Gender": "M",
+	"UserName": "afsdad",
+	"Email": "raghayev@gmail.com",
+	"Password": "Rasim123$",
+	"UserStatus": "E"
+}
+
+
+
+ACL
+
+1.UserID
+2.RoleID
+3.PermitionID
+
+1.1 UserID,UserName,RoleID,PermitionID
+
+{
+	"SurName": "Aghayev",
+	"Name": "Rasim",
+	"MiddleName": "Shukur",
+	"Gender": "M",
+	"UserName": "raghayev",
+	"Email": "rasim.aghayev@pashabank.az",
+	"Password": "123456789",
+	"UserStatus": "E"
+}
+
+
+{
+	"Email": "rasim.aghayev@pashabank.az",
+	"Password": "123456789"
+}

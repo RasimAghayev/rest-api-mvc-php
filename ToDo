@@ -1,0 +1,15 @@
+Task
+Add commet all function
+register
+1.'Password' => 'req|min:6|strength:uppercase,lowercase,number,specialChars'
+    send mail user
+    ->(UserName,Email)
+    ->ResetLink
+2.Add users_action_history->(Action,Url)
+3.URL/email->send email
+
+
+
+Login
+1.Failed Login attempt count 8 user status change Locked
+

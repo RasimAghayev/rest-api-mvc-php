@@ -1,0 +1,7 @@
+Password->Check->Dublicat_Values
+
+20200707 02:07:01.575491  {"User":{"Code":503,"IP":"127.0.0.1","Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36","Data":{"status":0,"url":"https:\/\/bsc-rest.rst\/api\/users\/login","message":"Access denied","data":"GET"}}}
+20200707 02:07:01.898882  {"User":{"Code":404,"IP":"127.0.0.1","Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36","Data":{"status":0,"url":"https:\/\/bsc-rest.rst\/api\/users\/login","message":"All data needed"}}}
+
+20200707 02:06:41.793069  {"User":{"Code":503,"IP":"127.0.0.1","Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36","Data":{"status":0,"url":"http:\/\/bsc-rest.rst\/api\/users\/register","message":"Access denied"}}}
+20200707 02:06:44.355734  {"User":{"Code":417,"IP":"127.0.0.1","Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36","Data":{"status":0,"url":"http:\/\/bsc-rest.rst\/api\/users\/register","message":"SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'SurName' cannot be null"}}}

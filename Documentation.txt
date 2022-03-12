@@ -1,0 +1,50 @@
+BSC REST
+TN->True Next
+FD->False Die
+RP->Reprot
+CH->Check
+IP->Input
+EP->Empty
+FR->Forward
+            'D'=>'Disable',
+            'H'=>'Hold',
+            'R'=>'Reset',
+            'L'=>'Lock'
+
+0.register
+	1.POST->TN,FD++++++++++++++
+	2.JSON_DECODE data->RP++++++++++++++
+	
+1.login
+	1.POST->TN,FD++++++++++++++
+	2.JSON_DECODE data->RP++++++++++++++
+	3.Email,UserName,Password->IP->CH->!EP->TN,FD++++++++++++++
+	4.$user_data->userModel->login->(Email,UserName->CH->TN,FD++++++++++++++
+	5.$user_data['Expiration_Date']->CH->(E)TN,(R)FR (line->52.Users)-----------
+	6.$user_status->CH->TN,FD++++++++++++++
+	7.password_verify++++++++++++++
+		8 FR->T_OTP
+				8.1 jwtEncode->Create++++++++++++++
+		9.$user_faild_attempt<8++++++++++++++
+			1.userModel->loginFaildAttempsC++++++++++++++
+		 ...2.userModel->loginFaildAttempsU++++++++++++++
+		
+		Reset->Password
+		ReNew->Password Check Password History
+2.resetPassword
+	1.POST->TN,FD++++++++++++++
+	2.JSON_DECODE data->RP++++++++++++++
+	3.Email,UserName->IP->CH->!EP->TN,FD++++++++++++++
+	4.$user_data->userModel->login->(Email,UserName->CH->TN,FD++++++++++++++
+3.checkResetToken
+	1.POST->TN,FD++++++++++++++
+	2.JSON_DECODE data->RP++++++++++++++
+4.
+	1.POST->TN,FD++++++++++++++
+	2.JSON_DECODE data->RP++++++++++++++
+5.
+	1.POST->TN,FD++++++++++++++
+	2.JSON_DECODE data->RP++++++++++++++
+6.
+	1.POST->TN,FD++++++++++++++
+	2.JSON_DECODE data->RP++++++++++++++

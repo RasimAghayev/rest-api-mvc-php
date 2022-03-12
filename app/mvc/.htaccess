@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteRule ^$ api/ [L]
+  RewriteRule (.*) api/$1 [L]
+  #RewriteRule ^$ bazar.az/api/ [L]
+  #RewriteRule (.*) bazar.az/api/$1 [L]
+</IfModule>
