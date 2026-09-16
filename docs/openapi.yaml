@@ -1,0 +1,350 @@
+openapi: "3.0.3"
+info:
+  title: rest-api-mvc-php API
+  description: >
+    PHP REST API with MVC pattern, JWT authentication,
+    2FA (TOTP/Google Authenticator), MySQL, and session-based auth.
+  version: "1.0.0"
+  contact:
+    name: rest-api-mvc-php team
+
+servers:
+  - url: http://localhost:8000/api
+    description: Local PHP dev server
+  - url: http://localhost/api
+    description: Local Nginx
+  - url: https://api.yourdomain.com/api
+    description: Production
+
+tags:
+  - name: User Authentication
+    description: Registration, login, and session management
+  - name: 2FA
+    description: Two-factor authentication (TOTP/Google Authenticator)
+  - name: Password Reset
+    description: Token-based password reset flow
+
+paths:
+  /users/register:
+    post:
+      tags:
+        - User Authentication
+      summary: Register a new user with 2FA setup
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "404":
+          description: User already exists
+        "417":
+          description: Server error / exception
+        "424":
+          description: Failed to create user
+        "500":
+          description: Validation failed
+        "503":
+          description: Wrong HTTP method
+
+  /users/login:
+    post:
+      tags:
+        - User Authentication
+      summary: Authenticate user and get 2FA data
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "202":
+          description: Login successful, 2FA required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+        "403":
+          description: User is locked/disabled/hold/reset
+        "404":
+          description: Invalid credentials / User not found / Password expired
+        "417":
+          description: Invalid credentials
+        "503":
+          description: Wrong HTTP method
+
+  /users/resetPassword:
+    post:
+      tags:
+        - Password Reset
+      summary: Initiate password reset with 10-minute token
+      operationId: resetPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResetPasswordRequest"
+      responses:
+        "201":
+          description: Reset token created
+        "404":
+          description: Email not found
+        "503":
+          description: Wrong HTTP method
+
+  /users/checkResetToken:
+    post:
+      tags:
+        - Password Reset
+      summary: Validate a password reset token
+      operationId: checkResetToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CheckResetTokenRequest"
+      responses:
+        "200":
+          description: Token is valid
+        "404":
+          description: Token expired or invalid
+        "503":
+          description: Wrong HTTP method
+
+  /users/g2faCodeC:
+    post:
+      tags:
+        - 2FA
+      summary: Generate or retrieve 2FA code/setup
+      operationId: generate2FACode
+      security:
+        - session: []
+      responses:
+        "200":
+          description: 2FA data with QR code
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TwoFactorResponse"
+        "404":
+          description: Invalid 2FA credentials
+
+  /users/g2faCodeV:
+    post:
+      tags:
+        - 2FA
+      summary: Verify Google Authenticator TOTP code
+      operationId: verify2FACode
+      security:
+        - session: []
+      responses:
+        "200":
+          description: 2FA code verified
+
+  /users/logout:
+    post:
+      tags:
+        - User Authentication
+      summary: Destroy user session
+      operationId: logout
+      security:
+        - session: []
+      responses:
+        "200":
+          description: Session destroyed
+
+  /users/createUserSession:
+    post:
+      tags:
+        - User Authentication
+      summary: Create session for authenticated user
+      operationId: createSession
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSessionRequest"
+      responses:
+        "200":
+          description: Session created
+        "404":
+          description: User not found
+
+components:
+  securitySchemes:
+    session:
+      type: apiKey
+      in: cookie
+      name: PHPSESSID
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    RegisterRequest:
+      type: object
+      required:
+        - SurName
+        - Name
+        - MiddleName
+        - Gender
+        - UserName
+        - Email
+        - Password
+        - UserStatus
+      properties:
+        SurName:
+          type: string
+          minLength: 3
+          maxLength: 16
+          pattern: "^[a-zA-Z]+$"
+        Name:
+          type: string
+          minLength: 3
+          maxLength: 16
+          pattern: "^[a-zA-Z]+$"
+        MiddleName:
+          type: string
+          minLength: 3
+          maxLength: 16
+          pattern: "^[a-zA-Z]+$"
+        Gender:
+          type: string
+          pattern: "^[a-zA-Z]+$"
+        UserName:
+          type: string
+          minLength: 5
+        Email:
+          type: string
+          format: email
+        Password:
+          type: string
+          minLength: 6
+          description: Must contain uppercase, lowercase, number, specialChars
+        UserStatus:
+          type: string
+          pattern: "^[a-zA-Z]+$"
+        Expiration_Date:
+          type: string
+          format: date-time
+          description: Optional
+
+    LoginRequest:
+      type: object
+      required:
+        - Email
+        - Password
+      properties:
+        Email:
+          type: string
+          description: Email or UserName
+        Password:
+          type: string
+
+    LoginResponse:
+      type: object
+      properties:
+        user_id:
+          type: integer
+        md51Key:
+          type: string
+          description: Secret key for session
+        OtherKey:
+          type: string
+          description: 2FA code for verification
+        imgKey:
+          type: string
+          description: Base64-encoded QR code PNG
+        redirect:
+          type: string
+          description: Redirect path (e.g. /TOTP)
+
+    ResetPasswordRequest:
+      type: object
+      required:
+        - Email
+      properties:
+        Email:
+          type: string
+          format: email
+          description: User email
+
+    CheckResetTokenRequest:
+      type: object
+      required:
+        - Token
+      properties:
+        Token:
+          type: string
+          description: Reset token from email
+
+    TwoFactorResponse:
+      type: object
+      properties:
+        md52Key:
+          type: string
+        jstKey:
+          type: integer
+          description: JWT start timestamp
+        jetKey:
+          type: integer
+          description: JWT end timestamp
+        imgKey:
+          type: string
+          format: uri
+          description: Base64-encoded QR code PNG or null
+
+    CreateSessionRequest:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: integer
+          description: User ID
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: integer
+          enum: [1]
+        status:
+          type: integer
+        url:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+          nullable: true
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: integer
+          enum: [0]
+        status:
+          type: integer
+        url:
+          type: string
+        message:
+          type: string
+        data:
+          type: object
+          nullable: true

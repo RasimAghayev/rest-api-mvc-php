@@ -123,6 +123,11 @@ rest-api-mvc-php/
 │       │   ├── SelectList.php
 │       │   └── Task.php
 │       └── .htaccess
+├── docs/
+│   ├── architecture.md    (NEW — diagrams + patterns)
+│   ├── api.md             (NEW — endpoint reference)
+│   ├── openapi.yaml       (NEW — OpenAPI 3.0 spec)
+│   └── installation.md    (NEW — setup guide)
 ├── important/
 │   ├── file.php
 │   ├── generate_uuid.php

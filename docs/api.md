@@ -395,22 +395,31 @@ Create a new session for authenticated user.
 | IP Tracking | All auth events include `user_ip` |
 
 ---
-
 ## Testing with Postman
 
+The [OpenAPI spec](openapi.yaml) provides a machine-readable API contract
+that can be imported directly into Postman, Insomnia, or any OpenAPI-compatible tool.
+
+### Import into Postman
+
+1. Open Postman → File → Import → Link
+2. Paste: `http://localhost/api/docs/openapi.yaml` (or the raw file URL)
+3. All 8 endpoints will appear as collection requests
+
 ### Environment Variables
+
 | Variable | Value |
 |----------|-------|
 | `base_url` | `http://localhost/api` |
 
 ### Test Sequence
+
 1. `POST /users/register` — Create account
 2. `POST /users/login` — Get 2FA data
 3. `POST /users/g2faCodeV` — Verify 2FA
 4. `POST /users/resetPassword` — Request reset
 5. `POST /users/checkResetToken` — Validate token
 6. `POST /users/logout` — End session
-
 ---
 
 ## Changelog
