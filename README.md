@@ -475,9 +475,10 @@ curl http://localhost:8000/users/login \
 
 | Project | Relationship |
 |---------|--------------|
-| `react-with-laravel` | Frontend consumer pattern |
+| `react-with-laravel` | Frontend consumer of this API |
 | `web-scraping-php` | PHP ecosystem companion |
 | `csv2json_spatie` | Data transformation companion |
+| `nanoservice-laravel` | Monolithic vs microservices comparison |
 
 ---
 
