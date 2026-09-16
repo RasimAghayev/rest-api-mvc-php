@@ -395,35 +395,41 @@ curl -X POST http://localhost/api/users/resetPassword \
 
 ## Installation
 
-### Requirements
+Full installation guide with Composer dependencies, environment setup, and configuration: [docs/installation.md](docs/installation.md)
 
-- PHP 8.x with PDO MySQL extension
-- MySQL 5.7+ / MariaDB
-- Nginx or Apache with mod_rewrite
-- Composer (optional — no composer.json yet)
-
-### Setup
+### Quick Start
 
 ```bash
-# Clone the repository
+# 1. Clone the repository
 git clone https://github.com/RasimAghayev/rest-api-mvc-php.git
 cd rest-api-mvc-php
 
-# Configure database
-# Edit app/config/ to set database credentials
+# 2. Configure database credentials in app/config/config.php
 
-# Import database schema
-# CREATE DATABASE rest_api;
-# USE rest_api;
-# Source: database.sql (if available)
+# 3. Import database schema
+mysql -u your_user -p rest_api < database.sql
 
-# Configure web server
-# Point document root to /api/ directory
-# Or use .htaccess rules in /api/.htaccess
+# 4. Install Composer dependencies
+composer install
 
-# Start PHP built-in server (development)
-php -S localhost:8000 -t api/
+# 5. Start development server
+cd api
+php -S localhost:8000
+
+# 6. Test the API
+curl http://localhost:8000/users/login \
+  -H "Content-Type: application/json" \
+  -d '{"Email":"your@email.com","Password":"your-password"}'
 ```
+
+### Requirements
+
+| Requirement | Version |
+|-------------|---------|
+| PHP | >= 8.0 |
+| MySQL | 5.7+ / MariaDB |
+| Composer | >= 2.0 |
+| Web Server | Nginx or Apache (or PHP built-in server) |
 
 ### Database Tables
 
@@ -452,10 +458,11 @@ php -S localhost:8000 -t api/
 | Password Reset | ✅ Active |
 | Login Attempt Limit | ✅ Active |
 | Session Auth | ✅ Active |
+| JWT Auth Middleware | ✅ Active |
 | Docker Support | ❌ Missing |
 | API Documentation | ❌ Missing |
-| PHPUnit Tests | ❌ Missing |
-| Composer Setup | ❌ Missing |
+| PHPUnit Tests | ✅ Scaffolded |
+| Composer Setup | ✅ Complete |
 
 ---
 
