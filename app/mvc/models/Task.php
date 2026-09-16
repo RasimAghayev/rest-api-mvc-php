@@ -1,19 +1,55 @@
 <?php
-
+/**
+ * Task Model
+ *
+ * Handles task and post CRUD operations with user association.
+ * Tasks are linked to users via UserID foreign key.
+ * Posts table is referenced by edit/delete/getTaskById methods (legacy/placeholder).
+ *
+ * @package    rest-api-mvc-php
+ * @subpackage app/mvc/models
+ * @author     rest-api-mvc-php team
+ * @version    1.0
+ */
 class Task
 {
+    /** @var Database PDO connection */
     private $db;
 
+    /**
+     * Task constructor.
+     *
+     * Initializes database connection.
+     */
     public function __construct()
     {
         $this->db = new Database;
     }
-    // Add Post
+
+    /**
+     * Add a new task.
+     *
+     * @param array $data {
+     *     @type int    $user_id        - FK to users.id
+     *     @type string $CompanyName    - Company name
+     *     @type string $WorkName       - Work item name
+     *     @type string $SegmentName    - Segment name
+     *     @type int    $WorkCount      - Work count
+     *     @type string $TaskStartTime  - Start time (DATETIME)
+     *     @type string $TaskEndTime    - End time (DATETIME)
+     *     @type string $FailureTask    - Failure notes
+     *     @type string $Note           - Notes
+     * }
+     *
+     * @return bool True on success, false on failure
+     *
+     * @flow Documentation.txt section 1.login -> step 2
+     */
     public function addTask($data)
     {
         // Prepare Query
         $this->db->query('INSERT INTO tasks (UserID,CompanyName,WorkName,SegmentName,WorkCount,TaskStartTime,TaskEndTime,FailureTask,Note) 
-VALUES (:user_id,:CompanyName,:WorkName,:SegmentName,:WorkCount,:TaskStartTime,:TaskEndTime,:FailureTask,:Note);');
+        VALUES (:user_id,:CompanyName,:WorkName,:SegmentName,:WorkCount,:TaskStartTime,:TaskEndTime,:FailureTask,:Note);');
 
         // Bind Values
         $this->db->bind(':user_id', $data['user_id']);
@@ -33,7 +69,19 @@ VALUES (:user_id,:CompanyName,:WorkName,:SegmentName,:WorkCount,:TaskStartTime,:
         }
     }
 
-    // Update Post
+    /**
+     * Update a post (legacy/placeholder).
+     *
+     * @param array $data {
+     *     @type int    $id     - Post ID
+     *     @type string $title  - Post title
+     *     @type string $body   - Post content
+     * }
+     *
+     * @return bool True on success, false on failure
+     *
+     * @note This operates on `posts` table (legacy). Task model uses tasks table for addTask/deleteTask/getTasks.
+     */
     public function updateTask($data)
     {
         // Prepare Query
@@ -52,7 +100,15 @@ VALUES (:user_id,:CompanyName,:WorkName,:SegmentName,:WorkCount,:TaskStartTime,:
         }
     }
 
-    // Delete Post
+    /**
+     * Delete a task by ID.
+     *
+     * @param int $id Task primary key
+     *
+     * @return bool True on success, false on failure
+     *
+     * @flow Documentation.txt section 1.login -> step 5
+     */
     public function deleteTask($id)
     {
         // Prepare Query
@@ -69,7 +125,13 @@ VALUES (:user_id,:CompanyName,:WorkName,:SegmentName,:WorkCount,:TaskStartTime,:
         }
     }
 
-    // Get All Posts
+    /**
+     * Get all tasks with associated user data.
+     *
+     * @return array|false Array of task rows with userId, or false on failure
+     *
+     * @flow Documentation.txt section 1.login -> step 6
+     */
     public function getTasks()
     {
         $this->db->query("SELECT *, 
@@ -85,7 +147,15 @@ VALUES (:user_id,:CompanyName,:WorkName,:SegmentName,:WorkCount,:TaskStartTime,:
         return $results;
     }
 
-    // Get Post By ID
+    /**
+     * Get a post by ID (legacy/placeholder).
+     *
+     * @param int $id Post primary key
+     *
+     * @return array|false Post row, or false if not found
+     *
+     * @note Uses posts table (legacy artifact). See schema.md for posts table definition.
+     */
     public function getTaskById($id)
     {
         $this->db->query("SELECT * FROM posts WHERE id = :id");
