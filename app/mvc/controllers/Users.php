@@ -19,6 +19,8 @@ class Users extends Controller
     private $data;
     /** @var string OTP verification code */
     private $code;
+    /** @var OTPService OTP service instance */
+    private $otpService;
 
     /**
      * Users constructor.
@@ -27,6 +29,7 @@ class Users extends Controller
      */
     public function __construct() {
         $this->userModel = $this->model('User');
+        $this->otpService = new OTPService($this->userModel);
     }
 
     /**
@@ -178,25 +181,7 @@ class Users extends Controller
      */
     public function g2faCodeC(): array
     {
-        $g2faDB=$this->userModel->g2faCodeR();
-        (!$g2faDB)?die(HTTPStatus(404,0,'/',"Invalid credentials g2faCode")):'';
-        $pga = new GoogleAuthenticator();
-        $this->userModel->g2fa=$pga->createSecret();
-        if(empty($g2faDB['g2fa'])){
-            $this->userModel->g2faCodeU();
-            $qr_code =  $pga->getQRCodeGoogleUrl($this->userModel->Email, $this->userModel->g2fa,'BSC',array(300,300,'Q'));
-            $image = file_get_contents($qr_code);
-            if ($image !== false){
-                $imgKey= 'data:image/png;base64,'.base64_encode($image);
-            }
-        }
-        $data=[
-            'md52Key'=>strtolower((($g2faDB['g2fa'])?$g2faDB['g2fa']:$this->userModel->g2fa).generateRandomString(16)),
-            'jstKey'=>$g2faDB['jwt_start_time'],
-            'jetKey'=>$g2faDB['jwt_end_time'],
-            'imgKey'=>$imgKey
-        ];
-        return $data;
+        return $this->otpService->setupOTP($this->userModel->user_id);
     }
 
     /**
@@ -210,7 +195,7 @@ class Users extends Controller
      * @see Users::g2faCodeC()
      */
     public function g2faCodeV(){
-        $this->g2faCodeC();
+        return $this->otpService->setupOTP($this->userModel->user_id);
     }
 
     /**
