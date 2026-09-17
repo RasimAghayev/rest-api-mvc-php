@@ -37,57 +37,57 @@
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    Client Request                        │
+│                    Client Request                       │
 └─────────────────────────────────────────────────────────┘
                                 │
                                 ▼
 ┌─────────────────────────────────────────────────────────┐
-│                    Nginx / Apache                        │
-│              (Document root → /api/)                     │
+│                    Nginx / Apache                       │
+│              (Document root → /api/)                    │
 └─────────────────────────────────────────────────────────┘
                                 │
                                 ▼
 ┌─────────────────────────────────────────────────────────┐
-│                   api/index.php                          │
-│         (Bootstrap → Core Init → Route)                  │
+│                   api/index.php                         │
+│         (Bootstrap → Core Init → Route)                 │
 └─────────────────────────────────────────────────────────┘
                                 │
                                 ▼
-┌─────────────────────────────────────────────────────────┐
-│              app/mvc/controllers/                        │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────────┐ │
-│  │  Users.php   │ │ Dashboards.php│ │ Reports.php      │ │
-│  │              │ │              │ │ SelectLists.php  │ │
-│  │  register    │ │ index        │ │ index            │ │
-│  │  login       │ │ index2       │ │                  │ │
-│  │  resetPassword│ │ create       │ │                  │ │
-│  │  checkReset  │ │ edit         │ │                  │ │
-│  │  g2faCodeC   │ │ delete       │ │                  │ │
-│  │  g2faCodeV   │ │              │ │                  │ │
-│  │  logout      │ │              │ │                  │ │
-│  │  createSession│ │             │ │                  │ │
-│  └──────────────┘ └──────────────┘ └──────────────────┘ │
-└─────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────┐
+│              app/mvc/controllers/                         │
+│  ┌───────────────┐ ┌───────────────┐ ┌──────────────────┐ │
+│  │  Users.php    │ │ Dashboards.php│ │ Reports.php      │ │
+│  │               │ │               │ │ SelectLists.php  │ │
+│  │  register     │ │ index         │ │ index            │ │
+│  │  login        │ │ index2        │ │                  │ │
+│  │  resetPassword│ │ create        │ │                  │ │
+│  │  checkReset   │ │ edit          │ │                  │ │
+│  │  g2faCodeC    │ │ delete        │ │                  │ │
+│  │  g2faCodeV    │ │               │ │                  │ │
+│  │  logout       │ │               │ │                  │ │
+│  │  createSession│ │               │ │                  │ │
+│  └───────────────┘ └───────────────┘ └──────────────────┘ │
+└───────────────────────────────────────────────────────────┘
+                                │
+                                ▼
+┌───────────────────────────────────────────────────────────────┐
+│              app/mvc/models/                                  │
+│  ┌────────────────────┐ ┌──────────────┐ ┌──────────────────┐ │
+│  │  User.php          │ │ Dashboard.php│ │ Report.php       │ │
+│  │                    │ │              │ │ SelectList.php   │ │
+│  │  registerUser      │ │ getPosts     │ │ getReport        │ │
+│  │  login             │ │ editPost     │ │                  │ │
+│  │  login*Attmps      │ │ deletePost   │ │                  │ │
+│  │  resetPassword     │ │              │ │                  │ │
+│  │  checkResetToken   │ │              │ │                  │ │
+│  │  g2faCode*         │ │              │ │                  │ │
+│  │  userActionHistory*│ │              │ │                  │ │
+│  └────────────────────┘ └──────────────┘ └──────────────────┘ │
+└───────────────────────────────────────────────────────────────┘
                                 │
                                 ▼
 ┌─────────────────────────────────────────────────────────┐
-│              app/mvc/models/                             │
-│  ┌──────────────┐ ┌──────────────┐ ┌──────────────────┐ │
-│  │  User.php    │ │ Dashboard.php│ │ Report.php       │ │
-│  │              │ │              │ │ SelectList.php   │ │
-│  │  registerUser│ │ getPosts     │ │ getReport        │ │
-│  │  login       │ │ editPost     │ │                  │ │
-│  │  login*Attmps│ │ deletePost   │ │                  │ │
-│  │  resetPassword│ │             │ │                  │ │
-│  │  checkResetToken│ │            │ │                  │ │
-│  │  g2faCode*   │ │              │ │                  │ │
-│  │  userActionHistory*│ │        │ │                  │ │
-│  └──────────────┘ └──────────────┘ └──────────────────┘ │
-└─────────────────────────────────────────────────────────┘
-                                │
-                                ▼
-┌─────────────────────────────────────────────────────────┐
-│                     MySQL Database                       │
+│                     MySQL Database                      │
 │  users, users_password_reset, users_password_failed,    │
 │  users_login_history, users_action_history,             │
 │  users_list_code, dashboards, reports, tasks,           │
@@ -206,11 +206,11 @@ Login Attempt
 │ Password correct?   │
 └──────────┬──────────┘
            │
-     ┌─────┴──────┐
-     ▼             ▼
-   YES            NO
-   │              │
-   ▼              ▼
+     ┌─────┴────────┐
+     ▼              ▼
+    YES            NO
+     │              │
+     ▼              ▼
 Generate       Login Faild
 2FA Data       Attempt +1
 (2FA secret,   Check count
@@ -285,7 +285,7 @@ curl -X POST http://localhost/api/users/register \
     "Gender": "M",
     "UserName": "afsdad",
     "Email": "raghayev@gmail.com",
-    "Password": "Rasim123$",
+    "Password": "123789",
     "UserStatus": "E",
     "Expiration_Date": "2027-01-01 00:00:00"
   }'
@@ -303,7 +303,7 @@ curl -X POST http://localhost/api/users/register \
     "Gender": "M",
     "UserName": "afsdad",
     "Email": "raghayev@gmail.com",
-    "Password": "Rasim123$",
+    "Password": "123789",
     "UserStatus": "E"
   }
 }
@@ -315,7 +315,7 @@ curl -X POST http://localhost/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
     "Email": "raghayev@gmail.com",
-    "Password": "Rasim123$"
+    "Password": "123789"
   }'
 ```
 
