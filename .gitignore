@@ -21,3 +21,6 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
+
+# Docker bind-mount root (R92) — nginx logs, mysql data, redis data
+var/
