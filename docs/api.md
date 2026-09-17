@@ -79,7 +79,7 @@ curl -X POST http://localhost/api/users/register \
     "Gender": "M",
     "UserName": "raghayev",
     "Email": "raghayev@gmail.com",
-    "Password": "Rasim123$",
+    "Password": "123789",
     "UserStatus": "E",
     "Expiration_Date": "2027-01-01 00:00:00"
   }'
@@ -127,7 +127,7 @@ curl -X POST http://localhost/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
     "Email": "raghayev@gmail.com",
-    "Password": "Rasim123$"
+    "Password": "123789"
   }'
 ```
 
