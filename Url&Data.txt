@@ -18,7 +18,7 @@ http://bsc-rest.rst/api/users/register
 	"Gender": "M",
 	"UserName": "afsdad",
 	"Email": "raghayev@gmail.com",
-	"Password": "Rasim123$",
+	"Password": "123789",
 	"UserStatus": "E"
 }
 
@@ -38,13 +38,13 @@ ACL
 	"MiddleName": "Shukur",
 	"Gender": "M",
 	"UserName": "raghayev",
-	"Email": "rasim.aghayev@pashabank.az",
-	"Password": "123456789",
+	"Email": "rasim.aghayev@psh.az",
+	"Password": "123789",
 	"UserStatus": "E"
 }
 
 
 {
-	"Email": "rasim.aghayev@pashabank.az",
-	"Password": "123456789"
+	"Email": "rasim.aghayev@psh.az",
+	"Password": "123789"
 }
