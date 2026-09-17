@@ -124,10 +124,14 @@ rest-api-mvc-php/
 │       │   └── Task.php
 │       └── .htaccess
 ├── docs/
-│   ├── architecture.md    (NEW — diagrams + patterns)
-│   ├── api.md             (NEW — endpoint reference)
-│   ├── openapi.yaml       (NEW — OpenAPI 3.0 spec)
-│   └── installation.md    (NEW — setup guide)
+│   ├── architecture.md    — diagrams + patterns + roadmap
+│   ├── api.md             — endpoint reference
+│   ├── openapi.yaml       — OpenAPI 3.0 spec
+│   ├── installation.md    — setup guide
+│   ├── schema.md          — database schema reference
+│   ├── auth-flow.md       — auth state machine (mermaid)
+│   ├── jwt-auth.md        — JWT token flow guide
+│   └── otp-verification.md — 2FA/TOTP guide
 ├── important/
 │   ├── file.php
 │   ├── generate_uuid.php
@@ -135,11 +139,6 @@ rest-api-mvc-php/
 │   └── js/
 ├── other/OTP/
 │   └── OTP_JS.html        # Frontend OTP interface
-├── Documentation.txt      # Auth state machine (raw)
-├── ToDo                   # Feature tasks
-├── Url&Data.txt           # API endpoint examples
-├── cmd                    # Frontend setup commands
-├── CMD2                   # Framework comparison commands
 ├── LICENSE                # MIT License
 └── README.md              # This file
 ```
@@ -284,8 +283,8 @@ curl -X POST http://localhost/api/users/register \
     "MiddleName": "Shukur",
     "Gender": "M",
     "UserName": "afsdad",
-    "Email": "raghayev@gmail.com",
-    "Password": "123789",
+    "Email": "user@example.com",
+    "Password": "123456",
     "UserStatus": "E",
     "Expiration_Date": "2027-01-01 00:00:00"
   }'
@@ -302,8 +301,8 @@ curl -X POST http://localhost/api/users/register \
     "MiddleName": "Shukur",
     "Gender": "M",
     "UserName": "afsdad",
-    "Email": "raghayev@gmail.com",
-    "Password": "123789",
+    "Email": "user@example.com",
+    "Password": "123456",
     "UserStatus": "E"
   }
 }
@@ -314,8 +313,8 @@ curl -X POST http://localhost/api/users/register \
 curl -X POST http://localhost/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
-    "Email": "raghayev@gmail.com",
-    "Password": "123789"
+    "Email": "user@example.com",
+    "Password": "123456"
   }'
 ```
 
@@ -338,7 +337,7 @@ curl -X POST http://localhost/api/users/login \
 curl -X POST http://localhost/api/users/resetPassword \
   -H "Content-Type: application/json" \
   -d '{
-    "Email": "raghayev@gmail.com"
+    "Email": "user@example.com"
   }'
 ```
 
@@ -348,7 +347,7 @@ curl -X POST http://localhost/api/users/resetPassword \
   "success": true,
   "message": "Users has been reset",
   "data": {
-    "Email": "raghayev@gmail.com"
+    "Email": "user@example.com"
   }
 }
 ```

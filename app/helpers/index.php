@@ -162,19 +162,22 @@ function sendMail(){
     $mail->SMTPSecure = "tls";
 
 //Username to use for SMTP authentication - use full email address for gmail
-    $mail->Username = 'tehzeh159@gmail.com';
+//Docker/env override support (see app/config/config.php pattern): falls back
+//to a placeholder when no environment variable is set. Set real values only
+//in your local .env, never commit them.
+    $mail->Username = getenv('SMTP_USERNAME') ?: 'user@example.com';
 
 //Password to use for SMTP authentication
-    $mail->Password = 'esfemgwrtpfdkgnu';
+    $mail->Password = getenv('SMTP_PASSWORD') ?: '123456';
 
 //Set who the message is to be sent from
-    $mail->setFrom('rasimaqayev@gmail.com', 'First Last');
+    $mail->setFrom(getenv('SMTP_FROM_EMAIL') ?: 'from@example.com', 'First Last');
 
 //Set an alternative reply-to address
-    $mail->addReplyTo('rasimaqayev@gmail.com', 'First Last');
+    $mail->addReplyTo(getenv('SMTP_FROM_EMAIL') ?: 'from@example.com', 'First Last');
 
 //Set who the message is to be sent to
-    $mail->addAddress('b061287@gmail.com', 'John Doe');
+    $mail->addAddress(getenv('SMTP_TEST_RECIPIENT') ?: 'recipient@example.com', 'John Doe');
 
 //Set the subject line
     $mail->Subject = 'PHPMailer GMail SMTP test';

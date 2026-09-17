@@ -56,7 +56,7 @@ class Users extends Controller
      *
      * @route POST /users
      * @validation See $rules in method body
-     * @flow Documentation.txt section 0.register
+     * @flow docs/auth-flow.md section 0.register
      */
     public function register(){
         !($_SERVER['REQUEST_METHOD'] === "POST")?die(HTTPStatus(503,0,'/',"Access denied",$_SERVER['REQUEST_METHOD'])):'';
@@ -115,7 +115,7 @@ class Users extends Controller
      * @return void JSON response (202/404/423/503)
      *
      * @route POST /users/login
-     * @flow Documentation.txt section 1.login
+     * @flow docs/auth-flow.md section 1.login
      */
     public function login(){
         !($_SERVER['REQUEST_METHOD'] === "POST")?die(HTTPStatus(503,0,'/',"Access denied",$_SERVER['REQUEST_METHOD'])):'';
@@ -177,7 +177,7 @@ class Users extends Controller
      * }
      *
      * @route Internal (called by login, g2faCodeV)
-     * @flow Documentation.txt section FR->T_OTP
+     * @flow docs/auth-flow.md section FR->T_OTP
      */
     public function g2faCodeC(): array
     {
@@ -213,7 +213,7 @@ class Users extends Controller
      * @return void JSON response (201/404/417/424/503)
      *
      * @route POST /users/reset-password
-     * @flow Documentation.txt section 2.resetPassword
+     * @flow docs/auth-flow.md section 2.resetPassword
      */
     public function resetPassword()
     {
@@ -248,7 +248,7 @@ class Users extends Controller
      * @return void JSON response (200/404/503)
      *
      * @route POST /users/check-reset-token
-     * @flow Documentation.txt section 3.checkResetToken
+     * @flow docs/auth-flow.md section 3.checkResetToken
      */
     public function checkResetToken(){
         !($_SERVER['REQUEST_METHOD'] === "POST")?die(HTTPStatus(503,0,'/',"Access denied",$_SERVER['REQUEST_METHOD'])):'';

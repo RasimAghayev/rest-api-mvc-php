@@ -77,9 +77,9 @@ curl -X POST http://localhost/api/users/register \
     "Name": "Rasim",
     "MiddleName": "Shukur",
     "Gender": "M",
-    "UserName": "raghayev",
-    "Email": "raghayev@gmail.com",
-    "Password": "123789",
+    "UserName": "johndoe",
+    "Email": "user@example.com",
+    "Password": "123456",
     "UserStatus": "E",
     "Expiration_Date": "2027-01-01 00:00:00"
   }'
@@ -126,8 +126,8 @@ Content-Type: application/json
 curl -X POST http://localhost/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
-    "Email": "raghayev@gmail.com",
-    "Password": "123789"
+    "Email": "user@example.com",
+    "Password": "123456"
   }'
 ```
 
@@ -179,7 +179,7 @@ Content-Type: application/json
 curl -X POST http://localhost/api/users/resetPassword \
   -H "Content-Type: application/json" \
   -d '{
-    "Email": "raghayev@gmail.com"
+    "Email": "user@example.com"
   }'
 ```
 
@@ -190,7 +190,7 @@ curl -X POST http://localhost/api/users/resetPassword \
   "status": 201,
   "url": "/",
   "message": "Users has been reset",
-  "data": { "Email": "raghayev@gmail.com" }
+  "data": { "Email": "user@example.com" }
 }
 ```
 

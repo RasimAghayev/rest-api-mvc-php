@@ -304,8 +304,7 @@ All exceptions should be caught and converted to standardized JSON error respons
 
 ## Reference
 
-- [Documentation.txt](../Documentation.txt) — Source auth state machine notation
-- [Auth Flow](../docs/auth-flow.md) — Mermaid flowcharts from Documentation.txt
+- [Auth Flow](../docs/auth-flow.md) — Mermaid flowcharts of the auth state machine (retired raw `Documentation.txt` notation, 2026-09-17)
 - [Architecture](../docs/architecture.md) — MVC layers, auth state diagram, DB schema
 - [API Reference](../docs/api.md) — Endpoint details
 - [Config](../app/config/config.php) — Application configuration

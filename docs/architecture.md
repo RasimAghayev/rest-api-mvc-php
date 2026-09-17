@@ -281,6 +281,25 @@ graph TB
 
 ---
 
+## Roadmap / Known Gaps
+
+Planned work that is not yet implemented, consolidated here from retired
+scratch notes (`ToDo`, `Url&Data.txt`) during the 2026-09-17 doc cleanup:
+
+- **Role-Based Access Control (ACL).** A `UserID` / `RoleID` / `PermissionID`
+  model was sketched but never built — there is no `roles` or `permissions`
+  table in the [current schema](schema.md); all endpoints are gated by
+  session auth + 2FA only, with no per-role permission checks.
+- **Outbound email.** A `sendMail()` / `save_mail()` PHPMailer+IMAP helper
+  exists in `app/helpers/index.php` (SMTP credentials now read from
+  `SMTP_USERNAME`/`SMTP_PASSWORD`/`SMTP_FROM_EMAIL`/`SMTP_TEST_RECIPIENT` env
+  vars, see `.env.example`) but it is **not called from any controller**.
+  Registration and `resetPassword` currently return the reset token/QR data
+  in the API response instead of emailing it — wiring `sendMail()` into
+  those flows is open work.
+
+---
+
 ## Reference
 
 - [README.md](../README.md) — Project overview and API reference
