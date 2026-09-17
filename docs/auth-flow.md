@@ -28,7 +28,6 @@ flowchart TD
     B -->|FD| Z[Abort]
     C --> D[Response]
     Z
-end
 ```
 
 ## 1. Login

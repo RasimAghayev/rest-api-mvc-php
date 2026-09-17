@@ -145,15 +145,15 @@ Steps:
 
 ```mermaid
 flowchart TD
-    A[Secret (base32)] --> B[Decode to binary]
-    C[Time slice: floor(now/30)] --> D[Pack as 8-byte big-endian]
-    B & D --> E[HMAC-SHA1(secret, time_bytes)]
-    E --> F[Dynamic truncation]
-    F --> G[Last nibble = offset]
-    G --> H[Extract 4 bytes at offset]
-    H --> I[Bitmask: 0x7FFFFFFF]
-    I --> J[Modulo 10^6]
-    J --> K[6-digit code, zero-padded]
+    A["Secret (base32)"] --> B["Decode to binary"]
+    C["Time slice: floor(now/30)"] --> D["Pack as 8-byte big-endian"]
+    B & D --> E["HMAC-SHA1(secret, time_bytes)"]
+    E --> F["Dynamic truncation"]
+    F --> G["Last nibble = offset"]
+    G --> H["Extract 4 bytes at offset"]
+    H --> I["Bitmask: 0x7FFFFFFF"]
+    I --> J["Modulo 10^6"]
+    J --> K["6-digit code, zero-padded"]
 ```
 
 ### 2.4 Timing-Safe Comparison
