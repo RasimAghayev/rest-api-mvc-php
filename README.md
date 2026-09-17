@@ -464,7 +464,7 @@ curl http://localhost:8000/users/login \
 | Login Attempt Limit | ✅ Active |
 | Session Auth | ✅ Active |
 | JWT Auth Middleware | ✅ Active |
-| Docker Support | ❌ Missing |
+| Docker Support | ✅ Missing |
 | API Documentation | ❌ Missing |
 | PHPUnit Tests | ✅ Scaffolded |
 | Composer Setup | ✅ Complete |
