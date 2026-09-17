@@ -328,8 +328,7 @@ Purpose: Verify TOTP setup matches between server and client before relying on m
 
 ## Reference
 
-- [Documentation.txt](../Documentation.txt) — Source auth state machine notation
-- [Auth Flow](../docs/auth-flow.md) — Mermaid flowcharts from Documentation.txt
+- [Auth Flow](../docs/auth-flow.md) — Mermaid flowcharts of the auth state machine (retired raw `Documentation.txt` notation, 2026-09-17)
 - [JWT Auth Guide](../docs/jwt-auth.md) — JWT token flow, middleware, validation
 - [API Reference](../docs/api.md) — Login endpoint, 2FA response format
 - [Architecture](../docs/architecture.md) — Auth state diagram, DB schema

@@ -43,7 +43,7 @@ class Task
      *
      * @return bool True on success, false on failure
      *
-     * @flow Documentation.txt section 1.login -> step 2
+     * @flow docs/auth-flow.md section 1.login -> step 2
      */
     public function addTask($data)
     {
@@ -107,7 +107,7 @@ class Task
      *
      * @return bool True on success, false on failure
      *
-     * @flow Documentation.txt section 1.login -> step 5
+     * @flow docs/auth-flow.md section 1.login -> step 5
      */
     public function deleteTask($id)
     {
@@ -130,7 +130,7 @@ class Task
      *
      * @return array|false Array of task rows with userId, or false on failure
      *
-     * @flow Documentation.txt section 1.login -> step 6
+     * @flow docs/auth-flow.md section 1.login -> step 6
      */
     public function getTasks()
     {

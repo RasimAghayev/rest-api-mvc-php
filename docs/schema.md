@@ -13,7 +13,7 @@ Generated: 2026-09-16
 | SurName | VARCHAR(16) | NO | Surname |
 | Name | VARCHAR(16) | NO | First name |
 | MiddleName | VARCHAR(16) | NO | Middle name |
-| Gender | VARCHAR(1) | NO | Gender code |
+| Gender | VARCHAR(1) | NO | Gender code: `M`=Male, `F`=Female, `O`=Other |
 | UserName | VARCHAR(16) | NO | Username (unique) |
 | Email | VARCHAR(255) | NO | Email (unique) |
 | Password | VARCHAR(255) | NO | BCRYPT hash |
@@ -67,7 +67,7 @@ Generated: 2026-09-16
 |--------|------|----------|-------------|
 | id | INT AUTO_INCREMENT | NO | Primary Key |
 | user_id | INT | NO | FK → users.id |
-| status | VARCHAR(2) | NO | Login status code |
+| status | VARCHAR(2) | NO | Login status code: `PT`=Password verify True (success), `PF`=Password verify False (failed), `R`=Reset requested, `T`=Reset token validated |
 | user_ip | VARCHAR(45) | NO | Login IP |
 | create_date | DATETIME | YES | Timestamp |
 

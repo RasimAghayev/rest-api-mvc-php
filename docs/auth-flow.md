@@ -140,6 +140,9 @@ flowchart TD
 
 ## Reference
 
-- [Documentation.txt](../Documentation.txt) — Source auth state machine notation
+> The raw `Documentation.txt` state-machine notation this page was converted
+> from has been retired (2026-09-17 doc cleanup) — this file is now the
+> single source of truth for the auth flow.
+
 - [Architecture](../architecture.md) — MVC layers, auth flow state diagram, DB schema
 - [API Reference](../docs/api.md) — Endpoint details

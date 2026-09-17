@@ -89,7 +89,7 @@ class User
      *
      * @return int|false Last insert ID on success, false on failure
      *
-     * @flow Documentation.txt section 0.register -> step 7
+     * @flow docs/auth-flow.md section 0.register -> step 7
      */
     public function registerUser() {
         $user_query = "INSERT INTO "
@@ -120,7 +120,7 @@ class User
      *
      * @return array|false User row as associative array, or false if not found
      *
-     * @flow Documentation.txt section 0.register -> step 6
+     * @flow docs/auth-flow.md section 0.register -> step 6
      */
     public function login()
     {
@@ -135,7 +135,7 @@ class User
      *
      * @return bool True on success, false on failure
      *
-     * @flow Documentation.txt section 1.login -> step 9
+     * @flow docs/auth-flow.md section 1.login -> step 9
      */
     public function loginFaildAttempsC()
     {
@@ -153,7 +153,7 @@ class User
      *
      * @return array|false Failed attempt row, or false if none
      *
-     * @flow Documentation.txt section 1.login -> step 9
+     * @flow docs/auth-flow.md section 1.login -> step 9
      */
     public function loginFaildAttempsR()
     {
@@ -167,7 +167,7 @@ class User
      *
      * @return bool True on success, false on failure
      *
-     * @flow Documentation.txt section 1.login -> step 9
+     * @flow docs/auth-flow.md section 1.login -> step 9
      */
     public function loginFaildAttempsU()
     {
@@ -185,7 +185,7 @@ class User
      *
      * @return bool True on success, false on failure
      *
-     * @flow Documentation.txt section 1.login -> step 7 (on success)
+     * @flow docs/auth-flow.md section 1.login -> step 7 (on success)
      */
     public function loginFaildAttempsD()
     {
@@ -204,7 +204,7 @@ class User
      *
      * @return bool True on success, false on failure
      *
-     * @flow Documentation.txt section 1.login -> steps 7,8,12,13
+     * @flow docs/auth-flow.md section 1.login -> steps 7,8,12,13
      */
     public function loginUserStatusC($notify_status)
     {
@@ -223,7 +223,7 @@ class User
      *
      * @return array|false Login history row, or false if none
      *
-     * @flow Documentation.txt section 1.login
+     * @flow docs/auth-flow.md section 1.login
      */
     public function loginUserStatusR()
     {
@@ -252,7 +252,7 @@ class User
      *
      * @return bool True on success, false on failure
      *
-     * @flow Documentation.txt section 0.register -> step 8
+     * @flow docs/auth-flow.md section 0.register -> step 8
      */
     public function g2faCodeC()
     {
@@ -317,7 +317,7 @@ class User
      *
      * @return bool True on success, false on failure
      *
-     * @flow Documentation.txt section 1.login -> step 13
+     * @flow docs/auth-flow.md section 1.login -> step 13
      */
     public function userActionHistoryC($action_status)
     {
@@ -367,7 +367,7 @@ class User
      *
      * @return bool True on success, false on failure
      *
-     * @flow Documentation.txt section 2.resetPassword -> step 5
+     * @flow docs/auth-flow.md section 2.resetPassword -> step 5
      */
     public function resetPassword()
     {
@@ -392,7 +392,7 @@ class User
      *
      * @return bool True if valid token exists, false otherwise
      *
-     * @flow Documentation.txt section 3.checkResetToken -> step 4
+     * @flow docs/auth-flow.md section 3.checkResetToken -> step 4
      */
     public function checkResetToken(){
         $this->conn->query("SELECT * FROM ". $this->users_preset_tbl ." WHERE Token = :Token and UserStatus=:UserStatus and Expired>:Expired;");
