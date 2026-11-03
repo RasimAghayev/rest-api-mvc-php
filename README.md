@@ -1,4 +1,6 @@
 # rest-api-mvc-php
+![Views](https://hits.sh/github.com/RasimAghayev/rest-api-mvc-php.svg?label=views&color=0e75b6)
+
 
 > PHP REST API — MVC Pattern, 2FA (TOTP/Google Authenticator), MySQL, Session-based Auth
 
